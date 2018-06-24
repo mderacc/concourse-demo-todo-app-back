@@ -8,7 +8,7 @@ public class PostTodoHandler implements Handler<RoutingContext> {
     @Override
     public void handle(RoutingContext routingContext) {
         String title = routingContext.getBodyAsJson().getString("title");
-        int priority = routingContext.getBodyAsJson().getInteger("priority");
+        int priority = Integer.parseInt(routingContext.getBodyAsJson().getString("priority"));
         DBClient.addTask(title, priority);
         routingContext.response().end("Created");
     }
