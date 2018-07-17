@@ -13,7 +13,7 @@ public class DBClient {
 
     public static void connect() throws ClassNotFoundException, SQLException {
         Class.forName("org.h2.Driver");
-        connection = DriverManager.getConnection("jdbc:h2:~/db");
+        connection = DriverManager.getConnection("jdbc:h2:tcp://localhost:1521/db");
         statement = connection.createStatement();
     }
 

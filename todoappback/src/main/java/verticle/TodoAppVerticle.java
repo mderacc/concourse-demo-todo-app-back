@@ -17,6 +17,13 @@ public class TodoAppVerticle extends AbstractVerticle {
     @Override
     public void start() throws Exception {
         final Router router = Router.router(vertx);
+	/*try {
+	    DBClient.connect();
+            DBClient.initDb();
+	    DBClient.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
         DBClient.connect();
         router.route("/todos*").handler(BodyHandler.create());
         router.route().handler(CorsHandler.create("*")
@@ -27,7 +34,7 @@ public class TodoAppVerticle extends AbstractVerticle {
         router.delete("/todos/:id").handler(new DeleteTodoHandler());
         router.post("/todos/").handler(new PostTodoHandler());
 
-        vertx.createHttpServer().requestHandler(router::accept).listen(8082);
+        vertx.createHttpServer().requestHandler(router::accept).listen(8080);
     }
 
     private Set<String> getAllowedHeaders() {
